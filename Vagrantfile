@@ -21,6 +21,7 @@ Vagrant.configure("2") do |config|
     my_app_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
 
     my_app_config.vm.provision :chef_solo do |chef|
+      chef.add_recipe "sample-app"
       chef.json = {
         :sample_app => {
           :words_of_wisdom => "Chuck Norris' beard can type 140 wpm!"
