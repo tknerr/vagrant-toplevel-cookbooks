@@ -21,19 +21,22 @@ module VagrantPlugins
           target_path = ".vagrant/app_cookbooks/#{vm_name}/app"
           cb_path = ".vagrant/app_cookbooks/#{vm_name}/cookbooks"
 
-          puts "cloning application cookbook from #{url}"
+          unless File.exist?(cb_path)
+            env[:ui].info "cleaning #{target_path}"
+            FileUtils.rm_rf target_path
+            FileUtils.mkdir_p target_path
 
-          FileUtils.rm_rf target_path
-          FileUtils.mkdir_p target_path
+            env[:ui].info "cloning application cookbook from #{url} into #{target_path}"
+            system "git clone #{url} #{target_path}"
 
-          system "git clone #{url} #{target_path}"
-          system "cd #{target_path} && berks install --path ../cookbooks"
+            env[:ui].info "installing cookbook dependencies to #{cb_path}"
+            system "cd #{target_path} && berks install --path ../cookbooks"
+          end
 
+          env[:ui].info "configuring chef_solo provisioners with cookbooks_path = #{cb_path}"
           provisioners(:chef_solo, env).each do |provisioner|
             provisioner.config.cookbooks_path = provisioner.config.send(:prepare_folders_config, cb_path)
           end
-
-          #raise "stop here..."
 
           # continue if ok
           @app.call(env)
