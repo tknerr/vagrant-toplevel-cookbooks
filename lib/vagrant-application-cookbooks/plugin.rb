@@ -21,17 +21,12 @@ module VagrantPlugins
         Config
       end
 
-      action_hook 'clone-application-cookbook-on-machine-up', :machine_action_up do |hook|
+      clone_action_hook = lambda do |hook|
         hook.before Vagrant::Action::Builtin::ConfigValidate, VagrantPlugins::ApplicationCookbooks::Action::Clone
       end
-=begin
-      check_action_hook = lambda do |hook|
-        require_relative 'action/check'
-        hook.before Vagrant::Action::Builtin::ConfigValidate, VagrantPlugins::PluginBundler::Action::Check
-      end
-      action_hook 'check-plugin-dependencies-on-machine-up', :machine_action_up, &check_action_hook
-      action_hook 'check-plugin-dependencies-on-machine-reload', :machine_action_reload, &check_action_hook
-=end
+      action_hook 'clone-application-cookbook-on-machine-up', :machine_action_up, &clone_action_hook
+      action_hook 'clone-application-cookbook-on-machine-reload', :machine_action_reload, &clone_action_hook
+      action_hook 'clone-application-cookbook-on-machine-provision', :machine_action_provision, &clone_action_hook
     end
   end
 end
