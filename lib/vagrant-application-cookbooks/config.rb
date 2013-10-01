@@ -1,4 +1,4 @@
-#require "vagrant"
+require "vagrant"
 
 module VagrantPlugins
   module ApplicationCookbooks
