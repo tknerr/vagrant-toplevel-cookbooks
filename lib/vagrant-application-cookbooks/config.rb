@@ -17,14 +17,18 @@ module VagrantPlugins
       def validate(machine)
         errors = _detected_errors
         if @ref != nil
-          errors << "url must not be nil if ref is specified" if @url.nil?
+          errors << "'app_cookbook.url' must be specified when 'app_cookbook.ref' is used" if @url.nil?
         end
         { "vagrant-application-cookbooks" => errors }
       end
 
       def finalize!
         @url = nil if @url == UNSET_VALUE
-        @ref = 'master' if @ref == UNSET_VALUE
+        if @url != nil
+          @ref = 'master' if @ref == UNSET_VALUE
+        else
+          @ref = nil if @ref == UNSET_VALUE
+        end
       end
     end
   end
