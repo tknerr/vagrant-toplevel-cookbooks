@@ -62,16 +62,23 @@ module VagrantPlugins
           end
         end
 
-        def call(env)
-          # ensure correct repo is cloned and ref checked out
-          clean_and_clone_repo unless is_cloned
-          update_and_checkout
+        def has_chef_solo_provisioner?
+          provisioners(:chef_solo).size > 0
+        end
 
-          # install app cookbook dependencies
-          install_cookbooks
-          
-          # configure cookbooks_path
-          configure_chef_solo
+        def call(env)
+
+          if has_chef_solo_provisioner?
+            # ensure correct repo is cloned and ref checked out
+            clean_and_clone_repo unless is_cloned
+            update_and_checkout
+
+            # install app cookbook dependencies
+            install_cookbooks
+            
+            # configure cookbooks_path
+            configure_chef_solo
+          end
 
           # continue if ok
           @app.call(env)
