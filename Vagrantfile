@@ -11,17 +11,15 @@ Vagrant.configure("2") do |config|
   config.omnibus.chef_version = "11.6.0"
   config.cache.auto_detect = true
 
+  config.vm.box = "opscode_ubuntu-12.04_provisionerless"
+  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
   #
   # configure vm to be deployed with application cookbook
   #
   config.vm.define :my_app do |my_app_config|
-
-    my_app_config.vm.box = "opscode_ubuntu-12.04_provisionerless"
-    my_app_config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-    
     # app cookbook to deploy
     my_app_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
-    #my_app_config.app_cookbook.ref = "lxc"
 
     my_app_config.vm.provision :chef_solo do |chef|
       chef.add_recipe "sample-app"
@@ -32,4 +30,38 @@ Vagrant.configure("2") do |config|
       }
     end
   end
+
+  #
+  # example for deploying a specific branch
+  #
+  config.vm.define :my_app_branched do |my_app_config|
+    # app cookbook to deploy
+    my_app_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
+    my_app_config.app_cookbook.ref = "lxc"
+
+    my_app_config.vm.provision :chef_solo do |chef|
+      chef.add_recipe "sample-app"
+    end
+  end
+
+  #
+  # example using a local file url
+  #
+  config.vm.define :my_app_local_file do |my_app_config|
+    # app cookbook to deploy
+    my_app_config.app_cookbook.url = "file://D:/Repos/_github/_cookbooks/sample-application-cookbook"
+    
+    my_app_config.vm.provision :chef_solo do |chef|
+      chef.add_recipe "sample-app"
+    end
+  end
+
+  #
+  # example without provisioner - should kick in here
+  #
+  config.vm.define :my_app_no_provisioner do |my_app_config|
+    # app cookbook to deploy
+    my_app_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
+  end
+  
 end
