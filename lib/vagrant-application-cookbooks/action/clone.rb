@@ -66,9 +66,13 @@ module VagrantPlugins
           provisioners(:chef_solo).size > 0
         end
 
+        def app_cookbook_configured?
+          git_url != nil
+        end
+
         def call(env)
 
-          if has_chef_solo_provisioner?
+          if app_cookbook_configured? && has_chef_solo_provisioner?
             # ensure correct repo is cloned and ref checked out
             clean_and_clone_repo unless is_cloned
             update_and_checkout

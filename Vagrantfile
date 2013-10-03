@@ -57,11 +57,20 @@ Vagrant.configure("2") do |config|
   end
 
   #
+  # example without application cookbook configured
+  #
+  config.vm.define :my_app_no_app_cookbook do |my_app_config|
+    my_app_config.vm.provision :chef_solo do |chef|
+      chef.add_recipe "sample-app"
+    end
+  end
+
+  #
   # example without provisioner - should kick in here
   #
   config.vm.define :my_app_no_provisioner do |my_app_config|
     # app cookbook to deploy
     my_app_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
   end
-  
+
 end
