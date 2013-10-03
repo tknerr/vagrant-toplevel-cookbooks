@@ -15,7 +15,7 @@ This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify applicatio
 Install using standard Vagrant 1.1+ plugin installation methods or via bindler. 
 
 To deploy the `sample-app` application cookbook from the `master` branch:
-```
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.define :sample do |sample_config|
     sample_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
@@ -27,7 +27,7 @@ end
 ```
 
 Or to deploy from a specific git `ref`, `branch` or `tag`:
-```
+```ruby
 ...
     sample_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
     sample_config.app_cookbook.ref = "some_ref"
@@ -35,7 +35,7 @@ Or to deploy from a specific git `ref`, `branch` or `tag`:
 ```
 
 You can also use local file URLs:
-```
+```ruby
 ...
     sample_config.app_cookbook.url = "file:///path/to/application-cookbook"
 ...
