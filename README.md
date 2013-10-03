@@ -13,22 +13,31 @@ This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify  applicati
 
 Install using standard Vagrant 1.1+ plugin installation methods or via bindler. 
 
-To deploy the `sample-app` application cookbook from `master` branch:
+To deploy the `sample-app` application cookbook from the `master` branch:
 ```
 Vagrant.configure("2") do |config|
-  config.vm.provision :chef_solo do |chef|
-    chef.application = "https://github.com/tknerr/sample-application-cookbook"
+  config.vm.define :sample do |sample_config|
+    sample_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
+    sample_config.vm.provision :chef_solo do |chef|
+      chef.add_recipe "sample-app"
+    end
   end
 end
 ```
 
-Or from a specific `ref`, `branch` or `tag`:
+Or to deploy from a specific git `ref`, `branch` or `tag`:
 ```
-Vagrant.configure("2") do |config|
-  config.vm.provision :chef_solo do |chef|
-    chef.application = git: "https://github.com/tknerr/sample-application-cookbook", ref: "v0.1.0"
-  end
-end
+...
+    sample_config.app_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
+    sample_config.app_cookbook.ref = "some_ref"
+...
+```
+
+You can also use local file URLs:
+```
+...
+    sample_config.app_cookbook.url = "file:///path/to/application-cookbook"
+...
 ```
 
 
@@ -51,8 +60,8 @@ If those pass, you're ready to start developing the plugin. You can test
 the plugin without installing it into your Vagrant environment by using the
 `Vagrantfile` in the top level of this directory and use bundler to execute Vagrant.
 
-To test that the sample application cookbook is deployed simply run:
+To test that the `my_app` vm is deployed with the `sample-app` application cookbook simply run:
 ```
-$ bundle exec vagrant up
+$ bundle exec vagrant up my_app
 ```
 
