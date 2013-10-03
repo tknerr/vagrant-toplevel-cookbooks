@@ -6,8 +6,8 @@ This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify applicatio
 
 * allows you to deploy application cookbooks from a Git repository
 * select a specific tag or branch to deploy
-* resolves each VMs application cookbook dependencies in isolation (i.e. no inter-VM dependency conflicts)
-* uses the Berksfile shipped with the application cookbook to resolve dependencies
+* resolves each VMs application cookbook dependencies in isolation to `.vagrant/machines/<vm-name>/cookbooks/` (i.e. no inter-VM dependency conflicts)
+* uses the `Berksfile` that is shipped with the application cookbook to resolve dependencies
 * configures the `cookbooks_path` of the `:chef_solo` provisioner accordingly
 
 ## Usage
