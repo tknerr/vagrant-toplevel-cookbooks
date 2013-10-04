@@ -9,7 +9,6 @@ group :development do
   gem "vagrant", "1.2.7",
     :git => "https://github.com/mitchellh/vagrant.git",
     :ref => "v1.2.7"
-  gem "berkshelf", "2.0.8"
   gem "vagrant-omnibus", "1.1.1"
   gem "vagrant-cachier", "0.3.3"
 end
