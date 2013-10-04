@@ -28,16 +28,6 @@ module VagrantPlugins
           @env[:ui].info msg
         end
 
-        def clean_and_clone_repo
-          FileUtils.rm_rf cloned_repo_path
-          FileUtils.mkdir_p cloned_repo_path
-          system "git clone #{git_url} #{cloned_repo_path}"
-        end
-
-        def update_and_checkout
-          system "cd #{cloned_repo_path} && git pull && git checkout #{git_ref}"
-        end
-
         def is_cloned?
           File.exist?(cloned_repo_path) && get_origin.eql?(git_url)
         end
@@ -46,13 +36,37 @@ module VagrantPlugins
           `cd #{cloned_repo_path} && git config --get remote.origin.url`.strip
         end
 
-        def install_cookbooks
-          system "cd #{cloned_repo_path} && berks install --path #{cookbook_install_path}"
-        end
-
         def cookbooks_path_configured?(provisioner)
           # see https://github.com/mitchellh/vagrant/blob/master/plugins/provisioners/chef/config/chef_solo.rb#L41-45
           provisioner.config.cookbooks_path != [[:host, "cookbooks"], [:vm, "cookbooks"]]
+        end
+
+        def has_chef_solo_provisioner?
+          provisioners(:chef_solo).size > 0
+        end
+
+        def app_cookbook_configured?
+          git_url != nil
+        end
+
+        def clean_and_clone_repo
+          FileUtils.rm_rf cloned_repo_path
+          FileUtils.mkdir_p cloned_repo_path
+          unless system("git clone #{git_url} #{cloned_repo_path}")
+            raise "something went wrong while cloning '#{git_url}'"
+          end
+        end
+
+        def update_and_checkout
+          unless system("cd #{cloned_repo_path} && git pull && git checkout #{git_ref}")
+            raise "something went wrong while updating / checking out '#{git_ref}'"
+          end
+        end
+
+        def install_cookbooks
+          unless system("cd #{cloned_repo_path} && berks install --path #{cookbook_install_path}")
+            raise "something went wrong while installing cookbook dependencies"
+          end
         end
 
         def configure_chef_solo
@@ -64,13 +78,6 @@ module VagrantPlugins
           end
         end
 
-        def has_chef_solo_provisioner?
-          provisioners(:chef_solo).size > 0
-        end
-
-        def app_cookbook_configured?
-          git_url != nil
-        end
 
         def call(env)
 
@@ -79,6 +86,8 @@ module VagrantPlugins
             if not is_cloned?
               log "Cloning application cookbook from '#{git_url}'"
               clean_and_clone_repo
+            else
+              log "Using application cookbook '#{git_url}'"
             end
 
             log "Ensuring application cookbook is checked out at '#{git_ref}'"
