@@ -11,10 +11,12 @@ module VagrantPlugins
         def initialize(app, env)
           @app = app
           @env = env
-          # by default data_dir points to ./.vagrant/machines/<NAME>/<PROVIDER>
-          @cloned_repo_path = env[:machine].data_dir.parent.join('app-cookbook', 'repo')
-          @cookbook_install_path = env[:machine].data_dir.parent.join('app-cookbook', 'cookbooks')
-          # from config
+          
+          # machine-specific paths to clone git repo and install cookbooks
+          @cloned_repo_path = env[:root_path].join('.vagrant', 'app-cookbooks', env[:machine].name.to_s, 'repo')
+          @cookbook_install_path = env[:root_path].join('.vagrant', 'app-cookbooks', env[:machine].name.to_s, 'cookbooks')
+          
+          # shortcut for values from config
           @git_url = env[:machine].config.app_cookbook.url
           @git_ref = env[:machine].config.app_cookbook.ref
         end
