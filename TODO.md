@@ -14,3 +14,4 @@
 [ ] check if url is a valid url
 [ ] use i18n
 [ ] suppress stdout / stderr when shelling out git commands
+[ ] add support for more provisioners / dependency managers
