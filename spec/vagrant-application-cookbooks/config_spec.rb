@@ -3,11 +3,6 @@ require "vagrant-application-cookbooks/config"
 describe VagrantPlugins::ApplicationCookbooks::Config do
   let(:instance) { described_class.new }
 
-  # Ensure tests are not affected by AWS credential environment variables
-  before :each do
-    ENV.stub(:[] => nil)
-  end
-
   describe "defaults" do
     subject do
       instance.tap do |o|
