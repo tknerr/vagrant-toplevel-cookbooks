@@ -1,5 +1,8 @@
 # Vagrant Application Cookbooks Plugin
 
+[![Build Status](https://travis-ci.org/tknerr/vagrant-application-cookbooks.png?branch=master)](https://travis-ci.org/tknerr/vagrant-application-cookbooks)
+
+
 This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify application cookbooks to deploy your VMs with. It will take care of cloning the application cookbook from the Git repository, resolve its dependencies via Berkshelf, and configure the Chef Solo provisioner accordingly.
 
 ## Features
