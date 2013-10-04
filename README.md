@@ -1,11 +1,11 @@
 # Vagrant Application Cookbooks Plugin
 
-This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify application cookbooks to deploy your VMs with. It will take care of cloning the application cookbook from the Git repository, resolve its dependencies via Berkshelf, and configure the Chef Solo provisioner accordingly. 
+This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify application cookbooks to deploy your VMs with. It will take care of cloning the application cookbook from the Git repository, resolve its dependencies via Berkshelf, and configure the Chef Solo provisioner accordingly.
 
 ## Features
 
-* allows you to deploy application cookbooks from a Git repository
-* select a specific tag or branch to deploy
+* allows you to deploy [application cookbooks](http://red-badger.com/blog/2013/06/24/berkshelf-application-cookbooks/) from a git repository (remote or local)
+* lets you choose a specific `ref` (i.e. commit, tag or branch) to deploy
 * resolves each VMs application cookbook dependencies in isolation to `.vagrant/machines/<vm-name>/cookbooks/` (i.e. no inter-VM dependency conflicts)
 * uses the `Berksfile` that is shipped with the application cookbook to resolve dependencies
 * configures the `cookbooks_path` of the `:chef_solo` provisioner accordingly
