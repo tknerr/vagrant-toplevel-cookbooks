@@ -1,5 +1,5 @@
 
-# 0.1.2 (unreleased)
+# 0.1.2 (Oct 5, 2013)
 
 * Silence output of git commands
 * Fix several issues with checkout and updating of refs
