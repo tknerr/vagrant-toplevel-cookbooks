@@ -1,7 +1,8 @@
 
 # 0.1.2 (unreleased)
 
-* Fix fetching all tags/branches when updating via git
+* Silence output of git commands
+* Fix several issues with checkout and updating of refs
 
 # 0.1.1 (Oct 5, 2013)
 

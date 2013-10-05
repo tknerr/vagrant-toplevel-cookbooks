@@ -52,20 +52,31 @@ module VagrantPlugins
         def clean_and_clone_repo
           FileUtils.rm_rf cloned_repo_path
           FileUtils.mkdir_p cloned_repo_path
-          unless system("git clone #{git_url} #{cloned_repo_path}")
+          unless system("git clone -q #{git_url} #{cloned_repo_path}")
             raise "something went wrong while cloning '#{git_url}'"
           end
         end
 
-        def update_and_checkout
-          unless system("cd #{cloned_repo_path} && git pull --all && git checkout #{git_ref}")
-            raise "something went wrong while updating / checking out '#{git_ref}'"
+        def checkout_and_update
+          Dir.chdir(cloned_repo_path) do
+            # retrieve all refs
+            system("git fetch -q --all")
+            # checkout ref
+            unless system("git checkout -q #{git_ref}")
+              raise "something went wrong while checking out '#{git_ref}'"
+            end
+            # update ref only if we are on a branch, i.e. not on a detached HEAD
+            unless `git symbolic-ref -q HEAD`.empty?
+              system("git pull -q")
+            end
           end
         end
 
         def install_cookbooks
-          unless system("cd #{cloned_repo_path} && berks install --path #{cookbook_install_path}")
-            raise "something went wrong while installing cookbook dependencies"
+          Dir.chdir(cloned_repo_path) do
+            unless system("berks install --path #{cookbook_install_path}")
+              raise "something went wrong while installing cookbook dependencies"
+            end
           end
         end
 
@@ -91,7 +102,7 @@ module VagrantPlugins
             end
 
             log "Ensuring application cookbook is checked out at '#{git_ref}'"
-            update_and_checkout
+            checkout_and_update
 
             log "Installing application cookbook dependencies to '#{cookbook_install_path}'"
             install_cookbooks
@@ -99,6 +110,8 @@ module VagrantPlugins
             log "Configuring Chef Solo provisioner for application cookbook"
             configure_chef_solo
           end
+
+          raise "boo"
 
           # continue if ok
           @app.call(env)
