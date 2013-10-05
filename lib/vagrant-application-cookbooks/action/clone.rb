@@ -111,8 +111,6 @@ module VagrantPlugins
             configure_chef_solo
           end
 
-          raise "boo"
-
           # continue if ok
           @app.call(env)
         end
