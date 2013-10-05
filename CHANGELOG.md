@@ -1,7 +1,7 @@
 
-# 0.1.3 (unreleased)
+# 0.1.3 (Oct 5, 2013)
 
-* ...
+* Fix permanently thrown exception (left-over from debugging)
 
 # 0.1.2 (Oct 5, 2013)
 
