@@ -74,9 +74,9 @@ module VagrantPlugins
 
         def install_cookbooks
           Dir.chdir(cloned_repo_path) do
-            unless system("berks install --path #{cookbook_install_path}")
-              raise "something went wrong while installing cookbook dependencies"
-            end
+            require 'berkshelf'
+            berksfile = Berkshelf::Berksfile.from_file('Berksfile')
+            berksfile.install(path: cookbook_install_path)
           end
         end
 
