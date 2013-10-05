@@ -1,5 +1,5 @@
 
-# 0.1.4 (unreleased)
+# 0.1.4 (Oct 5, 2013)
 
 * Use Berkshelf API rather than shelling out
 
