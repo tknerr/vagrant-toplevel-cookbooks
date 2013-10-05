@@ -58,7 +58,7 @@ module VagrantPlugins
         end
 
         def update_and_checkout
-          unless system("cd #{cloned_repo_path} && git pull && git checkout #{git_ref}")
+          unless system("cd #{cloned_repo_path} && git pull --all && git checkout #{git_ref}")
             raise "something went wrong while updating / checking out '#{git_ref}'"
           end
         end
