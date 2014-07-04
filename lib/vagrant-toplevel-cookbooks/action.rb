@@ -1,7 +1,7 @@
 require 'pathname'
 
 module VagrantPlugins
-  module ApplicationCookbooks
+  module TopLevelCookbooks
     module Action
 
       def self.action_root

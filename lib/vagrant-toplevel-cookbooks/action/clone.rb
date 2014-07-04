@@ -1,5 +1,5 @@
 module VagrantPlugins
-  module ApplicationCookbooks
+  module TopLevelCookbooks
     module Action
       
       # This middleware checks if reqiured plugins are present
@@ -12,12 +12,12 @@ module VagrantPlugins
           @env = env
 
           # machine-specific paths to clone git repo and install cookbooks
-          @cloned_repo_path = env[:root_path].join('.vagrant', 'app-cookbooks', env[:machine].name.to_s, 'repo')
-          @cookbook_install_path = env[:root_path].join('.vagrant', 'app-cookbooks', env[:machine].name.to_s, 'cookbooks')
+          @cloned_repo_path = env[:root_path].join('.vagrant', 'toplevel-cookbooks', env[:machine].name.to_s, 'repo')
+          @cookbook_install_path = env[:root_path].join('.vagrant', 'toplevel-cookbooks', env[:machine].name.to_s, 'cookbooks')
           
           # shortcut for values from config
-          @git_url = env[:machine].config.app_cookbook.url
-          @git_ref = env[:machine].config.app_cookbook.ref
+          @git_url = env[:machine].config.toplevel_cookbook.url
+          @git_ref = env[:machine].config.toplevel_cookbook.ref
         end
 
         def provisioners(name)
@@ -95,19 +95,19 @@ module VagrantPlugins
           if app_cookbook_configured? && has_chef_solo_provisioner?
 
             if not is_cloned?
-              log "Cloning application cookbook from '#{git_url}'"
+              log "Cloning top-level cookbook from '#{git_url}'"
               clean_and_clone_repo
             else
-              log "Using application cookbook '#{git_url}'"
+              log "Using top-level cookbook '#{git_url}'"
             end
 
-            log "Ensuring application cookbook is checked out at '#{git_ref}'"
+            log "Ensuring top-level cookbook is checked out at '#{git_ref}'"
             checkout_and_update
 
-            log "Installing application cookbook dependencies to '#{cookbook_install_path}'"
+            log "Installing top-level cookbook dependencies to '#{cookbook_install_path}'"
             install_cookbooks
 
-            log "Configuring Chef Solo provisioner for application cookbook"
+            log "Configuring Chef Solo provisioner for top-level cookbook"
             configure_chef_solo
           end
 

@@ -1,7 +1,7 @@
 require "vagrant"
 
 module VagrantPlugins
-  module ApplicationCookbooks
+  module TopLevelCookbooks
     class Config < Vagrant.plugin(2, :config)
       
       # git url to clone from
@@ -17,9 +17,9 @@ module VagrantPlugins
       def validate(machine)
         errors = _detected_errors
         if @ref != nil
-          errors << "'app_cookbook.url' must be specified when 'app_cookbook.ref' is used" if @url.nil?
+          errors << "'toplevel_cookbook.url' must be specified when 'toplevel_cookbook.ref' is used" if @url.nil?
         end
-        { "vagrant-application-cookbooks" => errors }
+        { "vagrant-toplevel-cookbooks" => errors }
       end
 
       def finalize!

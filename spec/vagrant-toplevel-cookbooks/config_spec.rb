@@ -1,6 +1,6 @@
-require "vagrant-application-cookbooks/config"
+require "vagrant-toplevel-cookbooks/config"
 
-describe VagrantPlugins::ApplicationCookbooks::Config do
+describe VagrantPlugins::TopLevelCookbooks::Config do
   let(:instance) { described_class.new }
 
   describe "defaults" do
@@ -34,7 +34,7 @@ describe VagrantPlugins::ApplicationCookbooks::Config do
       instance.ref = "my_branch"
       instance.finalize!
       err_hash = instance.validate(nil)
-      err_hash['vagrant-application-cookbooks'].size.should == 1
+      err_hash['vagrant-toplevel-cookbooks'].size.should == 1
     end
   end
 end
