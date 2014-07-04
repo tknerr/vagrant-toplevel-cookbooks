@@ -1,5 +1,5 @@
 module VagrantPlugins
-  module ApplicationCookbooks
+  module TopLevelCookbooks
     VERSION = "0.2.0.dev"
   end
 end

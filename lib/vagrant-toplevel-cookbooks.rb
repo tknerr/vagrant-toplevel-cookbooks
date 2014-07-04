@@ -1,10 +1,10 @@
 require "pathname"
 
-require "vagrant-application-cookbooks/plugin"
+require "vagrant-toplevel-cookbooks/plugin"
 
 module VagrantPlugins
   module ApplicationCookbooks
-    lib_path = Pathname.new(File.expand_path("../vagrant-application-cookbooks", __FILE__))
+    lib_path = Pathname.new(File.expand_path("../vagrant-toplevel-cookbooks", __FILE__))
     autoload :Action, lib_path.join("action")
     autoload :Errors, lib_path.join("errors")
 

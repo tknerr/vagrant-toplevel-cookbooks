@@ -1,18 +1,18 @@
 $:.unshift File.expand_path("../lib", __FILE__)
-require "vagrant-application-cookbooks/version"
+require "vagrant-toplevel-cookbooks/version"
 
 Gem::Specification.new do |s|
-  s.name          = "vagrant-application-cookbooks"
-  s.version       = VagrantPlugins::ApplicationCookbooks::VERSION
+  s.name          = "vagrant-toplevel-cookbooks"
+  s.version       = VagrantPlugins::TopLevelCookbooks::VERSION
   s.platform      = Gem::Platform::RUBY
   s.authors       = "Torben Knerr"
   s.email         = "mail@tknerr.de"
-  s.homepage      = "https://github.com/tknerr/vagrant-application-cookbooks"
-  s.summary       = "Deploy Chef \"Application Cookbooks\" directly from a Git repository"
-  s.description   = "Deploy Chef \"Application Cookbooks\" directly from a Git repository"
+  s.homepage      = "https://github.com/tknerr/vagrant-toplevel-cookbooks"
+  s.summary       = "Deploy Chef \"Top-Level Cookbooks\" directly from a Git repository"
+  s.description   = "Deploy Chef \"Top-Level Cookbooks\" directly from a Git repository"
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "vagrant-application-cookbooks"
+  s.rubyforge_project         = "vagrant-toplevel-cookbooks"
 
   s.add_dependency "berkshelf", "~> 2.0.10"
 
