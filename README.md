@@ -3,7 +3,9 @@
 [![Build Status](https://travis-ci.org/tknerr/vagrant-toplevel-cookbooks.png?branch=master)](https://travis-ci.org/tknerr/vagrant-toplevel-cookbooks)
 
 
-This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify the top-level cookbooks to deploy your VMs with. It will take care of cloning the top-level cookbook from the Git repository, resolve its dependencies via Berkshelf, and configure the Chef Solo provisioner accordingly.
+This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify the [top-level cookbooks](http://lists.opscode.com/sympa/arc/chef/2014-01/msg00419.html) to deploy your VMs with. It will take care of cloning the top-level cookbook from the Git repository, resolve its dependencies via Berkshelf, and configure the Chef Solo provisioner accordingly.
+
+Note: this plugin was previously (until v0.1.4) named `vagrant-application-cookbooks`, but since the term "application cookbook" is so much overloaded in the Chef community [I now call them "top-level cookbooks"](https://github.com/berkshelf/berkshelf/issues/535#issuecomment-40890497). 
 
 ## Features
 
