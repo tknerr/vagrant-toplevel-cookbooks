@@ -74,9 +74,8 @@ module VagrantPlugins
 
         def install_cookbooks
           Dir.chdir(cloned_repo_path) do
-            require 'berkshelf'
-            berksfile = Berkshelf::Berksfile.from_file('Berksfile')
-            berksfile.install(path: cookbook_install_path)
+            FileUtils.rm_rf cookbook_install_path
+            system "berks vendor #{cookbook_install_path}"
           end
         end
 
