@@ -21,6 +21,7 @@ module VagrantPlugins
         Config
       end
 
+      require_relative "action"
       clone_action_hook = lambda do |hook|
         hook.before Vagrant::Action::Builtin::ConfigValidate, VagrantPlugins::TopLevelCookbooks::Action::Clone
       end
