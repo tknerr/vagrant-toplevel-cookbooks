@@ -1,11 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# require plugin for testing via bundler
-Vagrant.require_plugin "vagrant-toplevel-cookbooks"
-Vagrant.require_plugin "vagrant-omnibus"
-Vagrant.require_plugin "vagrant-cachier"
-
 Vagrant.configure("2") do |config|
 
   config.omnibus.chef_version = "11.12.8"
@@ -19,7 +14,8 @@ Vagrant.configure("2") do |config|
   #
   config.vm.define :my_app do |my_app_config|
     # app cookbook to deploy
-    my_app_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook"
+    my_app_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
+    my_app_config.toplevel_cookbook.ref = "chefdk-update"
 
     my_app_config.vm.provision :chef_solo do |chef|
       chef.add_recipe "sample-app"
