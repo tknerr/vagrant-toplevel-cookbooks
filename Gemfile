@@ -9,6 +9,7 @@ group :development do
   gem "vagrant", "1.6.3",
     git: "https://github.com/mitchellh/vagrant.git",
     ref: "v1.6.3"
+  gem "berkshelf", "3.1.3"
 end
 
 group :plugins do
