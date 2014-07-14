@@ -6,8 +6,8 @@ Vagrant.configure("2") do |config|
   config.omnibus.chef_version = "11.12.8"
   config.cache.scope = :box
 
-  config.vm.box = "opscode_ubuntu-14.04"
-  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
+  config.vm.box = "opscode_ubuntu-13.04"
+  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.04_chef-provisionerless.box"
 
   #
   # configure vm to be deployed with toplevel cookbook
