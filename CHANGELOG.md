@@ -1,4 +1,8 @@
 
+# 0.2.2.dev (unreleased)
+
+ * ...
+
 # 0.2.1 (July 7, 2014)
 
  * bugfix: ensure we are not in a bundle context when running `berks vendor`
