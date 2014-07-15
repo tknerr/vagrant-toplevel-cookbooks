@@ -75,7 +75,9 @@ module VagrantPlugins
         def install_cookbooks
           Dir.chdir(cloned_repo_path) do
             FileUtils.rm_rf cookbook_install_path
-            system "berks vendor #{cookbook_install_path}"
+            Bundler.with_clean_env do
+              system "berks vendor #{cookbook_install_path}"
+            end
           end
         end
 
