@@ -1,18 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# require plugin for testing via bundler
-Vagrant.require_plugin "vagrant-toplevel-cookbooks"
-Vagrant.require_plugin "vagrant-omnibus"
-Vagrant.require_plugin "vagrant-cachier"
-
 Vagrant.configure("2") do |config|
 
-  config.omnibus.chef_version = "11.6.0"
-  config.cache.auto_detect = true
+  config.omnibus.chef_version = "11.12.8"
+  config.cache.scope = :box
 
-  config.vm.box = "opscode_ubuntu-12.04_provisionerless"
-  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+  config.vm.box = "opscode_ubuntu-12.04"
+  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
 
   #
   # configure vm to be deployed with toplevel cookbook

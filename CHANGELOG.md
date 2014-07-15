@@ -1,7 +1,11 @@
 
 # 0.2.0.dev (unreleased)
-
- * rename plugin to "vagrant-toplevel-cookbooks"
+   
+ * several **breaking changes**:
+   * rename plugin to "vagrant-toplevel-cookbooks"
+   * update to berkshelf 3 for [ChefDK](http://www.getchef.com/downloads/chef-dk) (berkshelf 2 is no longer supported)
+   * remove berkshelf gem dependency (`berks` must be on the `$PATH`)
+ * update development dependencies to latest vagrant 1.6 and adapt Vagrantfile samples
 
 # 0.1.4 (Oct 5, 2013)
 
