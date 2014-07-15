@@ -6,16 +6,15 @@ Vagrant.configure("2") do |config|
   config.omnibus.chef_version = "11.12.8"
   config.cache.scope = :box
 
-  config.vm.box = "opscode_ubuntu-13.04"
-  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.04_chef-provisionerless.box"
+  config.vm.box = "opscode_ubuntu-12.04"
+  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
 
   #
   # configure vm to be deployed with toplevel cookbook
   #
   config.vm.define :my_app do |my_app_config|
     # app cookbook to deploy
-    my_app_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-application-cookbook"
-    my_app_config.toplevel_cookbook.ref = "chefdk-update"
+    my_app_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook-cookbook"
 
     my_app_config.vm.provision :chef_solo do |chef|
       chef.add_recipe "sample-app"
