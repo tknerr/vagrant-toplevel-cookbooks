@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   #
   config.vm.define :my_app do |my_app_config|
     # app cookbook to deploy
-    my_app_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook-cookbook"
+    my_app_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook"
 
     my_app_config.vm.provision :chef_solo do |chef|
       chef.add_recipe "sample-app"
