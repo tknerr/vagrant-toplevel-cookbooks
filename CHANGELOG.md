@@ -1,5 +1,5 @@
 
-# 0.2.0.dev (unreleased)
+# 0.2.0 (July 7, 2014)
    
  * several **breaking changes**:
    * rename plugin to "vagrant-toplevel-cookbooks"
