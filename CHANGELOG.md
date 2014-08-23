@@ -1,7 +1,7 @@
 
 # 0.2.2.dev (unreleased)
 
- * ...
+ * add missing license information to gemspec ([#4](https://github.com/tknerr/vagrant-toplevel-cookbooks/issues/4))
 
 # 0.2.1 (July 7, 2014)
 

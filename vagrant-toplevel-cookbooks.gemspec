@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage      = "https://github.com/tknerr/vagrant-toplevel-cookbooks"
   s.summary       = "Deploy Chef \"Top-Level Cookbooks\" directly from a Git repository"
   s.description   = "Deploy Chef \"Top-Level Cookbooks\" directly from a Git repository"
+  s.license       = "MIT"
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "vagrant-toplevel-cookbooks"
