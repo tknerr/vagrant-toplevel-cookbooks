@@ -93,6 +93,7 @@ module VagrantPlugins
             if cookbooks_path_configured? provisioner
               @env[:ui].warn "WARNING: already configured `cookbooks_path` will be overridden!"
             end
+            provisioner.config.provisioning_path = "/tmp/vagrant-toplevel-cookbooks"
             provisioner.config.cookbooks_path = provisioner.config.send(:prepare_folders_config, cookbook_install_path)
           end
         end

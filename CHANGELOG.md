@@ -3,7 +3,7 @@
 
 ## 0.2.3.dev (unreleased)
 
- * ...
+ * fix another incompatibility with Vagrant 1.7 by explicitly setting the provisioning path to "/tmp/vagrant-toplevel-cookbooks"
 
 ## 0.2.2 (December 15, 2014)
 
