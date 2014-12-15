@@ -20,8 +20,15 @@ module VagrantPlugins
           @git_ref = env[:machine].config.toplevel_cookbook.ref
         end
 
-        def provisioners(name)
-          @env[:machine].config.vm.provisioners.select{ |prov| prov.name == name }
+        def provisioners(type)
+          @env[:machine].config.vm.provisioners.select do |provisioner|
+            if (provisioner.respond_to? :type)
+              # Vagrant 1.7+ compatibility
+              provisioner.type == type
+            else
+              provisioner.name == type
+            end
+          end
         end
 
         def log(msg)

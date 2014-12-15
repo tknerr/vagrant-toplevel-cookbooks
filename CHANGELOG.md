@@ -2,6 +2,7 @@
 # 0.2.2.dev (unreleased)
 
  * add missing license information to gemspec ([#4](https://github.com/tknerr/vagrant-toplevel-cookbooks/issues/4))
+ * add compatibility with vagrant 1.7+
 
 # 0.2.1 (July 7, 2014)
 
