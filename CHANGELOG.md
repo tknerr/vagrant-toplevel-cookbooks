@@ -1,7 +1,7 @@
 
 # CHANGELOG
 
-## 0.2.4 (unreleased)
+## 0.2.4 (February 4, 2015)
 
  * fix a nasty bug which causes some providers to lose the shared folder (see fgrehm/vagrant-lxc#342)
 
