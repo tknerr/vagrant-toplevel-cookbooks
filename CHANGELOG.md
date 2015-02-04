@@ -3,7 +3,7 @@
 
 ## 0.2.4 (unreleased)
 
- * ...
+ * fix a nasty bug which causes some providers to lose the shared folder (see fgrehm/vagrant-lxc#342)
 
 ## 0.2.3 (December 15, 2014)
 
