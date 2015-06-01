@@ -5,7 +5,7 @@
 
 This [Vagrant](http://www.vagrantup.com) 1.2+ plugin lets you specify the [top-level cookbooks](http://lists.opscode.com/sympa/arc/chef/2014-01/msg00419.html) to deploy your VMs with. It will take care of cloning the top-level cookbook from the Git repository, resolve its dependencies via Berkshelf, and configure the Chef Solo provisioner accordingly.
 
-Note: this plugin was previously (until v0.1.4) named `vagrant-application-cookbooks`, but since the term "application cookbook" is so much overloaded in the Chef community [I now call them "top-level cookbooks"](https://github.com/berkshelf/berkshelf/issues/535#issuecomment-40890497). 
+Note: this plugin was previously (until v0.1.4) named `vagrant-application-cookbooks`, but since the term "application cookbook" is so much overloaded in the Chef community [I now call them "top-level cookbooks"](https://github.com/berkshelf/berkshelf/issues/535#issuecomment-40890497).
 
 ## Features
 
@@ -17,13 +17,16 @@ Note: this plugin was previously (until v0.1.4) named `vagrant-application-cookb
 
 ## Usage
 
-Install using standard Vagrant 1.1+ plugin installation methods or via bindler. 
+Install using standard Vagrant plugin installation method:
+```
+$ vagrant plugin install vagrant-toplevel-cookbooks
+```
 
 To deploy the `sample-app` toplevel cookbook from the `master` branch:
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.define :sample do |sample_config|
-    sample_config.app_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook"
+    sample_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook"
     sample_config.vm.provision :chef_solo do |chef|
       chef.add_recipe "sample-app"
     end
@@ -34,15 +37,15 @@ end
 Or to deploy from a specific git `ref`, `branch` or `tag`:
 ```ruby
 ...
-    sample_config.app_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook"
-    sample_config.app_cookbook.ref = "some_ref"
+    sample_config.toplevel_cookbook.url = "https://github.com/tknerr/sample-toplevel-cookbook"
+    sample_config.toplevel_cookbook.ref = "some_ref"
 ...
 ```
 
 You can also use local file URLs:
 ```ruby
 ...
-    sample_config.app_cookbook.url = "file:///path/to/toplevel-cookbook"
+    sample_config.toplevel_cookbook.url = "file:///path/to/toplevel-cookbook"
 ...
 ```
 
@@ -70,4 +73,3 @@ To test that the `my_app` vm is deployed with the `sample-app` top-level cookboo
 ```
 $ bundle exec vagrant up my_app
 ```
-
