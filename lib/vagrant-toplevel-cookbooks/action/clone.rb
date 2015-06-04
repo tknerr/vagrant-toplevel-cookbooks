@@ -1,7 +1,7 @@
 module VagrantPlugins
   module TopLevelCookbooks
     module Action
-      
+
       # This middleware checks if reqiured plugins are present
       class Clone
 
@@ -14,7 +14,7 @@ module VagrantPlugins
           # machine-specific paths to clone git repo and install cookbooks
           @cloned_repo_path = env[:root_path].join('.vagrant', 'toplevel-cookbooks', env[:machine].name.to_s, 'repo')
           @cookbook_install_path = env[:root_path].join('.vagrant', 'toplevel-cookbooks', env[:machine].name.to_s, 'cookbooks')
-          
+
           # shortcut for values from config
           @git_url = env[:machine].config.toplevel_cookbook.url
           @git_ref = env[:machine].config.toplevel_cookbook.ref
@@ -65,26 +65,22 @@ module VagrantPlugins
         end
 
         def checkout_and_update
-          Dir.chdir(cloned_repo_path) do
-            # retrieve all refs
-            system("git fetch -q --all")
-            # checkout ref
-            unless system("git checkout -q #{git_ref}")
-              raise "something went wrong while checking out '#{git_ref}'"
-            end
-            # update ref only if we are on a branch, i.e. not on a detached HEAD
-            unless `git symbolic-ref -q HEAD`.empty?
-              system("git pull -q")
-            end
+          # retrieve all refs
+          system("cd #{cloned_repo_path} && git fetch -q --all")
+          # checkout ref
+          unless system("cd #{cloned_repo_path} && git checkout -q #{git_ref}")
+            raise "something went wrong while checking out '#{git_ref}'"
+          end
+          # update ref only if we are on a branch, i.e. not on a detached HEAD
+          unless `cd #{cloned_repo_path} && git symbolic-ref -q HEAD`.empty?
+            system("cd #{cloned_repo_path} && git pull -q")
           end
         end
 
         def install_cookbooks
-          Dir.chdir(cloned_repo_path) do
-            FileUtils.rm_rf Dir.glob("#{cookbook_install_path}/*")
-            Bundler.with_clean_env do
-              system "berks vendor #{cookbook_install_path}"
-            end
+          FileUtils.rm_rf Dir.glob("#{cookbook_install_path}/*")
+          Bundler.with_clean_env do
+            system "cd #{cloned_repo_path} && berks vendor #{cookbook_install_path}"
           end
         end
 

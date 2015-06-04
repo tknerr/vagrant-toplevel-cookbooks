@@ -3,7 +3,7 @@
 
 ## 0.2.5 (unreleased)
 
- * ...
+ * make the plugin thread-safe to support `vagrant up --parallel` (see [#9](https://github.com/tknerr/vagrant-toplevel-cookbooks/issues/9))
 
 ## 0.2.4 (February 4, 2015)
 
@@ -23,7 +23,7 @@
  * bugfix: ensure we are not in a bundle context when running `berks vendor`
 
 ## 0.2.0 (July 7, 2014)
-   
+
  * several **breaking changes**:
    * rename plugin to "vagrant-toplevel-cookbooks"
    * update to berkshelf 3 for [ChefDK](http://www.getchef.com/downloads/chef-dk) (berkshelf 2 is no longer supported)
